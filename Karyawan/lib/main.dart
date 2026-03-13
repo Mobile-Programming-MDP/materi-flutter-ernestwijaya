@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_pab2/screens/home_screen.dart';
 import 'package:tugas_pab2/models/karyawan.dart';
 
 void main() {
