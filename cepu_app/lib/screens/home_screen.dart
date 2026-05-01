@@ -1,6 +1,6 @@
 import 'package:cepu_app/screens/add_post_screen.dart';
 import 'package:cepu_app/screens/sign_in_screen.dart';
-import 'package:cepu_app/services/post_service.dart';
+import 'package:cepu_app/services/post_services.dart';
 import 'package:cepu_app/widgets/post_list_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 8.0),
           Text(
-            FirebaseAuth.instance.currentUser!.displayName!,
+            FirebaseAuth.instance.currentUser?.displayName ?? "Halo, User!",
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8.0),
