@@ -28,4 +28,12 @@ class Movie {
                 voteAverage: json['vote_average'] ?? 0);
   }
 
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) ||
+    other is Movie && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
 }

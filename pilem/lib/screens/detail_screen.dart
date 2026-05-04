@@ -55,15 +55,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
               Image.network(
                 'https://image.tmdb.org/t/p/w500${widget.movie.backdropPath}',
-                height: 300,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fitWidth,
               ),
 
               const SizedBox(height: 20),
 
               const Text(
-                'Overview:',
+                'Overview :',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -86,7 +85,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(width: 10),
 
                   const Text(
-                    'Release Date:',
+                    'Release Date :',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -110,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(width: 10),
 
                   const Text(
-                    'Rating:',
+                    'Rating :',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -137,7 +136,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   const SizedBox(width: 10),
 
                   const Text(
-                    'Favorite:',
+                    'Favorite :',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

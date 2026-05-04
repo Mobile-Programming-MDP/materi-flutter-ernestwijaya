@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pilem/Screens/favorite_manager.dart';
+import 'package:pilem/screens/favorite_manager.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -9,25 +9,18 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-
   @override
   Widget build(BuildContext context) {
-
     final favorites = FavoriteManager.favoriteMovies;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Favorite Movies"),
-      ),
+      appBar: AppBar(title: const Text("Favorite Movies")),
 
       body: favorites.isEmpty
-          ? const Center(
-              child: Text("No favorite movies yet"),
-            )
+          ? const Center(child: Text("No favorite movies yet"))
           : ListView.builder(
               itemCount: favorites.length,
               itemBuilder: (context, index) {
-
                 final movie = favorites[index];
 
                 return ListTile(
@@ -43,7 +36,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     icon: const Icon(Icons.delete),
                     onPressed: () {
                       setState(() {
-                        favorites.remove(movie);
+                        FavoriteManager.favoriteMovies.remove(movie);
                       });
                     },
                   ),
