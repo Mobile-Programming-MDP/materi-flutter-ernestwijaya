@@ -13,6 +13,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             const SizedBox(height: 32.0),
 
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Nama Lengkap',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -73,9 +82,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
     } else {
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final currentUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
+        );
+        await currentUser.user!.updateDisplayName(
+          _nameController.text,
         );
         if (mounted) {
           Navigator.of(context).pushReplacement(
