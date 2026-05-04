@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
                 final posts = snapshot.data ?? [];
+                
                 if (posts.isEmpty) {
                   return const Center(child: Text('No posts yet.'));
                 }
