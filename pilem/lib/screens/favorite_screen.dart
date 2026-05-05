@@ -8,7 +8,7 @@ class FavoriteScreen extends StatefulWidget {
   State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> {  
   @override
   Widget build(BuildContext context) {
     final favorites = FavoriteManager.favoriteMovies;

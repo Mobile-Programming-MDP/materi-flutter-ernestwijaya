@@ -44,10 +44,23 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
             child: StreamBuilder(
               stream: _shoppingService.getShoppingList(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+
                 if (snapshot.hasData) {
                   Map<String, String> items = snapshot.data!;
+                  if (items.isEmpty) {
+                    return const Center(
+                      child: Text('Belum ada barang. Tambahkan barang baru!'),
+                    );
+                  }
                   return ListView.builder(
-                    itemCount: snapshot.data!.length,
+                    itemCount: items.length,
                     itemBuilder: (context, index) {
                       final key = items.keys.elementAt(index);
                       final item = items[key];
@@ -62,11 +75,9 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                       );
                     },
                   );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  return const Center(child: CircularProgressIndicator());
                 }
+
+                return const Center(child: Text('Tidak ada data'));
               },
             ),
           ),
@@ -74,4 +85,4 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       ),
     );
   }
-} 
+}
