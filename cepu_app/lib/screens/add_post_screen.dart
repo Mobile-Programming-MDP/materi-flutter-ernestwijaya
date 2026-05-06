@@ -32,19 +32,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
     ];
   }
 
-  void _showCategoryfilter() {
-    final result = showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (context) {
-        return 
-      }
-    );
-  }
-
   //1.Fungsi pick, compress and convert Image
   Future<void> pickImageAndConvert() async {
     final ImagePicker picker = ImagePicker();

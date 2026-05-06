@@ -98,7 +98,7 @@ class PostListItem extends StatelessWidget {
               IconButton(
                 onPressed: () => _deletePost(context),
                 icon: const Icon(Icons.delete, color: Colors.red),
-                tooltip: 'Delete',
+                tooltip: 'Remove',
               ),
           ],
         ),

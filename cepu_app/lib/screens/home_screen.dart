@@ -29,6 +29,71 @@ class _HomeScreenState extends State<HomeScreen> {
     return 'https://ui-avatars.com/api/?name=$formattedName&color=FFFFFF&background=000000';
   }
 
+  //1. Create variable untuk menyimpan kategori
+  String? selectedCategory;
+  List<String> get categories {
+    return [
+      'Jalan Rusak',
+      'Lampu Jalan Mati',
+      'Lawan Arah',
+      'Merokok di Jalan',
+      'Tidak Pakai Helm',
+    ];
+  }
+
+  void showCategoryFilter() async {
+    final result = await showModalBottomSheet(
+      context: context, 
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (context) {
+        return SafeArea(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.75,
+            child: ListView(
+              padding: const EdgeInsets.only(bottom: 20),
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.clear),
+                  title: const Text('All Category'),
+                  onTap: () => Navigator.pop(
+                    context, null), // Null untuk memilih semua kategori 
+                ),
+                const Divider(),
+                  ...categories.map(
+                    (category) => ListTile(
+                      title: Text(category),
+                      trailing: selectedCategory == category
+                          ? Icon(
+                            Icons.check,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                          : null,
+                      onTap: () => Navigator.pop(
+                        context, 
+                        category,
+                        ), //kategory yang dipilih 
+                    ),
+                ),
+              ],
+            ),
+          ));
+      }
+    );
+
+    if (result != null) {
+      setState(() {
+        selectedCategory = result;
+      });
+    } else {
+      setState(() {
+        selectedCategory = null; // reset ke null untuk menampilkan semua kategori
+      });
+    }
+  } 
+
   @override
   Widget build(BuildContext context) {
     final currentUserId = FirebaseAuth.instance.currentUser?.uid;
