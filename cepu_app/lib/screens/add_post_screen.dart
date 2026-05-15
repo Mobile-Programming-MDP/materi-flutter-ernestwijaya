@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cepu_app/models/post.dart';
 import 'package:cepu_app/services/post_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -230,7 +229,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     setState(() => _isGenerating = true);
     try {
       const apiKey = 'YOUR-API-KEY';
-      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key='apikey'';
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key='apiKey'';
       final body = jsonEncode({
         "contents": [
           {
