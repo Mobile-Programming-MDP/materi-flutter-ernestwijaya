@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cepu_app/models/post.dart';
 import 'package:cepu_app/services/post_services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -204,6 +205,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
         ),
       );
       if (!mounted) return;
+      
+      sendNotificationToTopic(_descriptionController.text, fullName ?? "Anonymous");
+
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Posting berhasil disimpan")));
@@ -288,6 +292,38 @@ class _AddPostScreenState extends State<AddPostScreen> {
       debugPrint('Failed to generate AI description: $e');
     } finally {
       if (mounted) setState(() => _isGenerating = false);
+    }
+  }
+
+  // 8. buat method sendNotificationToTopic
+  Future<void> sendNotificationToTopic (String body, String senderName) async {
+    final url = Uri.parse('');
+    final response = await http.post(
+      url, 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        "topic": "berita-fasum", 
+        "title": "laporan baru",
+        "body": body,
+        "senderName": senderName,
+        "senderPhotoUrl": ""
+      }),
+    );
+
+    if(response.statusCode == 200) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Notifikasi berhasil dikirim')),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Notifikasi gagal dikirim: ${response.body}')),
+        );
+      }
     }
   }
 
