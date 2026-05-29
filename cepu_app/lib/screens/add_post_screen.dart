@@ -232,8 +232,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
     if (_base64Image == null) return;
     setState(() => _isGenerating = true);
     try {
-      const apiKey = 'YOUR-API-KEY';
-      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key='apiKey'';
+      const apiKey = '';
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=$apiKey';
       final body = jsonEncode({
         "contents": [
           {
@@ -297,7 +297,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   // 8. buat method sendNotificationToTopic
   Future<void> sendNotificationToTopic (String body, String senderName) async {
-    final url = Uri.parse('');
+    final url = Uri.parse('https://fcm-2.vercel.app/send-to-topic');
     final response = await http.post(
       url, 
       headers: {
@@ -308,20 +308,20 @@ class _AddPostScreenState extends State<AddPostScreen> {
         "title": "laporan baru",
         "body": body,
         "senderName": senderName,
-        "senderPhotoUrl": ""
+        "senderPhotoUrl": "https://static.vecteezy.com/system/resources/thumbnails/041/642/167/small_2x/ai-generated-portrait-of-handsome-smiling-young-man-with-folded-arms-isolated-free-png.png",
       }),
     );
 
     if(response.statusCode == 200) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Notifikasi berhasil dikirim')),
+          SnackBar(content: Text('✅ Notifikasi berhasil dikirim')),
         );
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Notifikasi gagal dikirim: ${response.body}')),
+          SnackBar(content: Text('❌ Notifikasi gagal dikirim: ${response.body}')),
         );
       }
     }

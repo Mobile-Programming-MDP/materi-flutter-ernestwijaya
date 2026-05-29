@@ -11,6 +11,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class SignInScreenState extends State<SignInScreen> {
+  // Future <void> test() async {
+  //   print('test');
+  // }
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -45,6 +49,8 @@ class SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () async {
+                  // await test();
+
                   try {
                     await FirebaseAuth.instance.signInWithEmailAndPassword(
                       email: _emailController.text,
